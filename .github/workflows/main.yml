@@ -10,16 +10,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     container:
       image: devkitpro/devkitarm
       options: --user 1001
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build Pokémon World
+      - name: Build
         run: make -j$(nproc --all)
 
       - name: Upload 3DSX
