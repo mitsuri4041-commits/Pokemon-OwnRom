@@ -1,0 +1,30 @@
+
+name: Build Pokemon World
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: devkitpro/devkitarm
+      options: --user 1001
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Pokémon World
+        run: make -j$(nproc --all)
+
+      - name: Upload 3DSX
+        uses: actions/upload-artifact@v4
+        with:
+          name: pokemon-world-3dsx
+          path: pokemon_world.3dsx
+          
